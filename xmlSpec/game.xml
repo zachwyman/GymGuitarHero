@@ -1,0 +1,121 @@
+<?xml version = "1.0"?>
+<GameData>
+<!-- screenTitle is also used to identify you and your animation.
+     So make sure to include your name as part of the screenTitle -->
+<title>The Tracker Framework</title>
+<maxStringSize>50</maxStringSize>
+
+<frameCapOn>true</frameCapOn>
+<period>17</period>
+
+<maxFrames>1000</maxFrames>
+<username>malloy</username>
+
+<view>
+  <width>854</width>
+  <height>480</height>
+</view>
+
+<world>
+  <width>854</width>
+  <height>480</height>
+</world>
+
+<blackBackground>
+  <file>assets/blackBackground.png</file>
+  <factor>4</factor>
+  <transparency>false</transparency>
+</blackBackground>
+
+<stands>
+  <file>assets/stands.BMP</file>
+  <factor>2</factor>
+  <transparency>true</transparency>
+</stands>
+
+<field>
+  <file>assets/field.BMP</file>
+  <factor>1</factor>
+  <transparency>true</transparency>
+</field>
+
+<font name="font">
+  <file>fonts/arial.ttf</file>
+  <size>24</size>
+  <red>255</red>
+  <green>0</green>
+  <blue>0</blue>
+  <alpha>0</alpha>
+</font>
+
+<SpinningStar>
+  <file>assets/spinstar.png</file>
+  <startLoc x="50" y="140"/>
+  <frames>4</frames>
+  <imageWidth>32</imageWidth>
+  <imageHeight>32</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>200</speedY>
+  <transparency>false</transparency>
+</SpinningStar>
+
+<Red>
+  <file>assets/red.png</file>
+  <startLoc x="0" y="176"/>
+  <frames>1</frames>
+  <imageWidth>128</imageWidth>
+  <imageHeight>128</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Red>
+
+<Blue>
+  <file>assets/blue.png</file>
+  <startLoc x="0" y="328"/>
+  <frames>1</frames>
+  <imageWidth>128</imageWidth>
+  <imageHeight>128</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Blue>
+
+<Green>
+  <file>assets/green.png</file>
+  <startLoc x="0" y="24"/>
+  <frames>1</frames>
+  <imageWidth>128</imageWidth>
+  <imageHeight>128</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>200</speedX>
+  <speedY>0</speedY>
+  <transparency>false</transparency>
+</Green>
+
+<HelmetTwoWay>
+  <file>assets/helmet2way.png</file>
+  <startLoc x="50" y="240"/>
+  <frames>2</frames>
+  <imageWidth>140</imageWidth>
+  <imageHeight>140</imageHeight>
+  <frameInterval>50</frameInterval>
+  <speedX>350</speedX>
+  <speedY>150</speedY>
+  <transparency>false</transparency>
+</HelmetTwoWay>
+
+<Helmet>
+  <file>assets/helmet.png</file>
+  <startLoc x="227" y="240"/>
+  <speedX>300</speedX>
+  <speedY>300</speedY>
+  <transparency>false</transparency>
+</Helmet>
+
+
+
+</GameData>

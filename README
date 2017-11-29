@@ -1,0 +1,23 @@
+Name: Zach Wyman
+
+Course: CPSC 4160
+
+Clemson Email Address: zwyman@clemson.edu
+
+Project no: 3
+
+Project due date: October 20, 2017
+
+Project description: Using the tracker framework to implement parallax scrolling and sprite movement with
+a custom background and custom sprites.
+
+The easiest part of this project: Changing the while and for loops.
+
+Problems that I had in completing this project: Parallax scrolling and the two way sprite were both difficult
+to implement. It was also fairly challenging to create my own sprites and backgrounds. It was very rewarding,
+however, to create my own sprites and backgrounds. It was really cool to see the stuff that I created actually
+doing stuff in the game.
+
+Notes: One of the Football helmets is a sprite, where as the other one is a two way sprite that switches directions
+when it hits the wall. The video is located in the frames directory, but all of the frames to make the video were
+deleted. Also, I couldn't figure out why but the video seemed very sped up.
