@@ -74,7 +74,7 @@ void Engine::update(Uint32 ticks) {
   if (playRecording) {
     int weight = -times[0]+times[times.size()-1]-3350;
     for (unsigned int i = 1; i < times.size()-1; i++) {
-      if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+20))) {
+      if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+50))) {
         sprites.push_back(new MultiSprite("Red", 0));
       }
     }
