@@ -5,11 +5,11 @@
 <title>The Tracker Framework</title>
 <maxStringSize>50</maxStringSize>
 
-<frameCapOn>true</frameCapOn>
+<frameCapOn>false</frameCapOn>
 <period>17</period>
 
-<maxFrames>1000</maxFrames>
-<username>malloy</username>
+<maxFrames>100000</maxFrames>
+<username>wyman</username>
 
 <view>
   <width>854</width>

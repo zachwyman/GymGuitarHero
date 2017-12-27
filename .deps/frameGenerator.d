@@ -41,8 +41,7 @@ build/frameGenerator.o: frameGenerator.cpp frameGenerator.h \
   /usr/local/include/SDL2/SDL_system.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h renderContext.h imageFactory.h \
-  image.h gamedata.h vector2f.h parseXML.h spriteSheet.h \
-  /usr/local/include/SDL2/SDL_image.h
+  image.h gamedata.h vector2f.h parseXML.h spriteSheet.h
 
 frameGenerator.h:
 
@@ -147,5 +146,3 @@ vector2f.h:
 parseXML.h:
 
 spriteSheet.h:
-
-/usr/local/include/SDL2/SDL_image.h:

@@ -4,6 +4,7 @@
 #include "renderContext.h"
 #include "clock.h"
 #include "world.h"
+#include "sound.h"
 #include "viewport.h"
 
 class Engine {
@@ -16,6 +17,7 @@ public:
 private:
   const RenderContext* rc;
   const IOmod& io;
+  SDLSound sound;
   Clock& clock;
 
   SDL_Renderer * const renderer;
@@ -23,8 +25,11 @@ private:
   Viewport& viewport;
 
   std::vector<Drawable*> sprites;
-  // Drawable* star;
-  // Drawable* spinningStar;
+  std::vector<int> times;
+
+  bool playRecording;
+  bool recording;
+
   int currentSprite;
   int counter;
   bool makeVideo;

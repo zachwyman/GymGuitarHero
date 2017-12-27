@@ -43,8 +43,7 @@ build/engine.o: engine.cpp sprite.h drawable.h \
   /usr/local/include/SDL2/SDL_version.h vector2f.h image.h multisprite.h \
   twoway.h gamedata.h parseXML.h engine.h ioMod.h \
   /usr/local/include/SDL2/SDL_ttf.h renderContext.h imageFactory.h \
-  spriteSheet.h /usr/local/include/SDL2/SDL_image.h clock.h world.h \
-  viewport.h frameGenerator.h
+  spriteSheet.h clock.h world.h viewport.h sound.h frameGenerator.h
 
 sprite.h:
 
@@ -162,12 +161,12 @@ imageFactory.h:
 
 spriteSheet.h:
 
-/usr/local/include/SDL2/SDL_image.h:
-
 clock.h:
 
 world.h:
 
 viewport.h:
+
+sound.h:
 
 frameGenerator.h:

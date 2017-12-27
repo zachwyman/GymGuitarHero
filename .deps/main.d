@@ -42,9 +42,8 @@ build/main.o: main.cpp engine.h /usr/local/include/SDL2/SDL.h \
   /usr/local/include/SDL2/SDL_timer.h \
   /usr/local/include/SDL2/SDL_version.h ioMod.h \
   /usr/local/include/SDL2/SDL_ttf.h renderContext.h imageFactory.h \
-  image.h gamedata.h vector2f.h parseXML.h spriteSheet.h \
-  /usr/local/include/SDL2/SDL_image.h clock.h world.h viewport.h \
-  drawable.h
+  image.h gamedata.h vector2f.h parseXML.h spriteSheet.h clock.h world.h \
+  viewport.h drawable.h sound.h
 
 engine.h:
 
@@ -154,8 +153,6 @@ parseXML.h:
 
 spriteSheet.h:
 
-/usr/local/include/SDL2/SDL_image.h:
-
 clock.h:
 
 world.h:
@@ -163,3 +160,5 @@ world.h:
 viewport.h:
 
 drawable.h:
+
+sound.h:

@@ -23,17 +23,22 @@ Engine::~Engine() {
 Engine::Engine() :
   rc( RenderContext::getInstance() ),
   io( IOmod::getInstance() ),
+  sound(),
   clock( Clock::getInstance() ),
   renderer( rc->getRenderer() ),
   nightsky("blackBackground", Gamedata::getInstance().getXmlInt("blackBackground/factor") ),
   viewport( Viewport::getInstance() ),
   sprites(),
+  times(),
+  playRecording(false),
+  recording(false),
   currentSprite(0),
   counter(0),
   makeVideo( false )
 {
 //  sprites.push_back(new MultiSprite("Football"));
   sprites.push_back(new MultiSprite("Red", 0));
+
   Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
   std::cout << "Loading complete" << std::endl;
 }
@@ -44,13 +49,19 @@ void Engine::draw() const {
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->draw();
   }
-  // star->draw();
-  // spinningStar->draw();
 
-  // std::stringstream strm;
-  // strm << "fps: " << clock.getFps();
-  // io.writeText(strm.str(), {255, 0, 255, 255}, 30, 60);
-  // io.writeText("Zach Wyman", {0, 0, 0, 255}, 30, 425);
+  if (recording) {
+    std::stringstream strm;
+    strm << "Recording time: " << (clock.getTicks() - times[0]) / 1000 << "." << (clock.getTicks()-times[0])%1000;
+    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+  }
+
+  if (playRecording) {
+    std::stringstream strm;
+    strm << "Playing time: " << (clock.getTicks() - times[times.size()-1]) / 1000 << "." << (clock.getTicks()-times[times.size()-1 ])%1000;
+    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+  }
+
 
 
   SDL_RenderPresent(renderer);
@@ -60,20 +71,14 @@ void Engine::update(Uint32 ticks) {
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->update(ticks);
   }
-
-  // counter++;
-  //
-  // if (counter % 140 == 0 && counter > 900) {
-  //   sprites.push_back(new MultiSprite("Football", 150));
-  //   std::cout << clock.getTicks() << std::endl;
-  // }
-  // else if (counter % 61 && counter && counter < 10000) {
-  //   sprites.push_back(new MultiSprite("Football", 300));
-  // }
-  // } else if (counter > 10000) {
-  //   counter = counter % 1000;
-  // }
-
+  if (playRecording) {
+    int weight = -times[0]+times[times.size()-1]-3350;
+    for (unsigned int i = 1; i < times.size()-1; i++) {
+      if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+20))) {
+        sprites.push_back(new MultiSprite("Red", 0));
+      }
+    }
+  }
   nightsky.update();
   viewport.update(); // always update viewport last
 }
@@ -90,7 +95,6 @@ void Engine::play() {
   bool done = false;
   Uint32 ticks = clock.getElapsedTicks();
   FrameGenerator frameGen;
-
   while ( !done ) {
     // The next loop polls for events, guarding against key bounce:
     while ( SDL_PollEvent(&event) ) {
@@ -113,13 +117,23 @@ void Engine::play() {
           makeVideo = true;
         }
         if (keystate[SDL_SCANCODE_R]) {
-          sprites.push_back(new MultiSprite("Blue", 0));
+          sound.startMusic();
+          times.clear();
+          recording = true;
+          playRecording = false;
+          times.push_back(clock.getTicks());
         }
-        if (keystate[SDL_SCANCODE_W]) {
+        if (keystate[SDL_SCANCODE_W] && recording) {
+          times.push_back(clock.getTicks());
           sprites.push_back(new MultiSprite("Red", 0));
         }
         if (keystate[SDL_SCANCODE_E]) {
-          sprites.push_back(new MultiSprite("Green", 0));
+          sound.stopMusic();
+          sound.startMusic();
+          makeVideo = true;
+          recording = false;
+          playRecording = true;
+          times.push_back(clock.getTicks());
         }
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
           std::cout << "Terminating frame capture" << std::endl;
