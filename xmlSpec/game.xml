@@ -70,6 +70,10 @@
   <speedX>200</speedX>
   <speedY>0</speedY>
   <transparency>false</transparency>
+  <chunk>
+    <size>16</size>
+    <distance>50</distance>
+  </chunk>
 </Red>
 
 <Blue>

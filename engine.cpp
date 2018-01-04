@@ -37,7 +37,7 @@ Engine::Engine() :
   makeVideo( false )
 {
 //  sprites.push_back(new MultiSprite("Football"));
-  sprites.push_back(new MultiSprite("Red", 0));
+  sprites.push_back(new Sprite("Red"));
 
   Viewport::getInstance().setObjectToTrack(sprites[currentSprite]);
   std::cout << "Loading complete" << std::endl;
@@ -67,7 +67,16 @@ void Engine::draw() const {
   SDL_RenderPresent(renderer);
 }
 
+void  Engine::checkForCollisions() {
+  for (unsigned int i = 0; i < sprites.size(); i++) {
+    if(sprites[i]->getX() > 700) {
+      static_cast<Sprite*>(sprites[i])->explode();
+    }
+  }
+}
+
 void Engine::update(Uint32 ticks) {
+  checkForCollisions();
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->update(ticks);
   }
@@ -75,7 +84,7 @@ void Engine::update(Uint32 ticks) {
     int weight = -times[0]+times[times.size()-1]-3350;
     for (unsigned int i = 1; i < times.size()-1; i++) {
       if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+50))) {
-        sprites.push_back(new MultiSprite("Red", 0));
+        sprites.push_back(new Sprite("Red"));
       }
     }
   }
@@ -123,11 +132,11 @@ void Engine::play() {
           playRecording = false;
           times.push_back(clock.getTicks());
         }
-        if (keystate[SDL_SCANCODE_W] && recording) {
+        if (keystate[SDL_SCANCODE_SPACE] && recording) {
           times.push_back(clock.getTicks());
-          sprites.push_back(new MultiSprite("Red", 0));
+          sprites.push_back(new Sprite("Red"));
         }
-        if (keystate[SDL_SCANCODE_E]) {
+        if (keystate[SDL_SCANCODE_G]) {
           sound.stopMusic();
           sound.startMusic();
           makeVideo = true;
