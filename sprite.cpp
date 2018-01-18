@@ -41,6 +41,20 @@ Sprite::Sprite(const std::string& name) :
   worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
 { }
 
+Sprite::Sprite(const std::string& name, int xLoc) :
+  Drawable(name,
+           Vector2f(Gamedata::getInstance().getXmlInt(name+"/startLoc/x") + xLoc,
+                    Gamedata::getInstance().getXmlInt(name+"/startLoc/y")),
+           Vector2f(
+                    Gamedata::getInstance().getXmlInt(name+"/speedX"),
+                    Gamedata::getInstance().getXmlInt(name+"/speedY"))
+           ),
+  image( RenderContext::getInstance()->getImage(name) ),
+  explosion(nullptr),
+  worldWidth(Gamedata::getInstance().getXmlInt("world/width")),
+  worldHeight(Gamedata::getInstance().getXmlInt("world/height"))
+{ }
+
 Sprite::Sprite(const Sprite& s) :
   Drawable(s),
   image(s.image),

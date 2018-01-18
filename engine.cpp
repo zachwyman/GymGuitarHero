@@ -50,17 +50,17 @@ void Engine::draw() const {
     sprites[i]->draw();
   }
 
-  // if (recording) {
-  //   std::stringstream strm;
-  //   strm << "Recording time: " << (clock.getTicks() - times[0]) / 1000 << "." << (clock.getTicks()-times[0])%1000;
-  //   io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
-  // }
-  //
-  // if (playRecording) {
-  //   std::stringstream strm;
-  //   strm << "Playing time: " << (clock.getTicks() - times[times.size()-1]) / 1000 << "." << (clock.getTicks()-times[times.size()-1 ])%1000;
-  //   io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
-  // }
+  if (recording) {
+    std::stringstream strm;
+    strm << "Recording time: " << (clock.getTicks() - times[0]) / 1000 << "." << (clock.getTicks()-times[0])%1000;
+    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+  }
+
+  if (playRecording) {
+    std::stringstream strm;
+    strm << "Playing time: " << (clock.getTicks() - times[times.size()-1]) / 1000 << "." << (clock.getTicks()-times[times.size()-1 ])%1000;
+    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+  }
 
 
 
@@ -82,8 +82,17 @@ void Engine::update(Uint32 ticks) {
   }
   if (playRecording) {
     int weight = -times[0]+times[times.size()-1]-3350;
+
     for (unsigned int i = 1; i < times.size()-1; i++) {
-      if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+50))) {
+      float dist = times[i]-times[0];
+      float start = dist / 3350 * 854;
+      int st = start;
+      if (dist < 3350 && dist > 0) {
+        std::cout << st << std::endl;
+        sprites.push_back(new Sprite("Red", st));
+        times[i] -= 4000;
+      }
+      else if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+50))) {
         sprites.push_back(new Sprite("Red"));
       }
     }
