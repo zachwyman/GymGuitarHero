@@ -6,7 +6,7 @@
 <maxStringSize>50</maxStringSize>
 
 <frameCapOn>false</frameCapOn>
-<period>17</period>
+<period>25</period>
 
 <maxFrames>100000</maxFrames>
 <username>wyman</username>
