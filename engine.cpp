@@ -81,7 +81,7 @@ void Engine::update(Uint32 ticks) {
     sprites[i]->update(ticks);
   }
   if (playRecording) {
-    int weight = -times[0]+times[times.size()-1]-3300;
+    int weight = -times[0]+times[times.size()-1]-3500;
 
     for (unsigned int i = 1; i < times.size()-1; i++) {
       float dist = times[i]-times[0];
