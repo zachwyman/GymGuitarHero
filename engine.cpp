@@ -94,6 +94,7 @@ void Engine::update(Uint32 ticks) {
       }
       else if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+100))) {
         sprites.push_back(new Sprite("Red"));
+        times[i] = 0 - times[i];
       }
     }
   }
@@ -148,7 +149,7 @@ void Engine::play() {
         if (keystate[SDL_SCANCODE_G]) {
           sound.stopMusic();
           sound.startMusic();
-          makeVideo = true;
+        //  makeVideo = true;
           recording = false;
           playRecording = true;
           times.push_back(clock.getTicks());
