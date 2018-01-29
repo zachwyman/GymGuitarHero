@@ -87,7 +87,7 @@ void Engine::update(Uint32 ticks) {
 
     for (unsigned int i = 1; i < timesRed.size()-1; i++) {
       float dist = timesRed[i]-timesRed[0];
-      float start =  (1 - (dist / 3500)) * 854;
+      float start =  (1 - (dist / 3500)) * 750;
       int st = start;
       if (dist < 3500 && dist > 0) {
         std::cout << st << std::endl;
@@ -103,7 +103,7 @@ void Engine::update(Uint32 ticks) {
     for (unsigned int i = 0; i < timesGreen.size(); i++) {
       float dist = timesGreen[i]-timesRed[0];
       std::cout << dist << std::endl;
-      float start =  (1 - (dist / 3500)) * 854;
+      float start =  (1 - (dist / 3500)) * 750;
       int st = start;
       if (dist < 3500 && dist > 0) {
         std::cout << st << std::endl;
@@ -118,7 +118,7 @@ void Engine::update(Uint32 ticks) {
 
     for (unsigned int i = 0; i < timesBlue.size(); i++) {
       float dist = timesBlue[i]-timesRed[0];
-      float start =  (1 - (dist / 3500)) * 854;
+      float start =  (1 - (dist / 3500)) * 750;
       int st = start;
       if (dist < 3500 && dist > 0) {
         std::cout << st << std::endl;
