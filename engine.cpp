@@ -51,18 +51,18 @@ void Engine::draw() const {
   for (unsigned int i = 0; i < sprites.size(); i++) {
     sprites[i]->draw();
   }
-  //
-  // if (recording) {
-  //   std::stringstream strm;
-  //   strm << "Recording time: " << (clock.getTicks() - times[0]) / 1000 << "." << (clock.getTicks()-times[0])%1000;
-  //   io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
-  // }
-  //
-  // if (playRecording) {
-  //   std::stringstream strm;
-  //   strm << "Playing time: " << (clock.getTicks() - times[times.size()-1]) / 1000 << "." << (clock.getTicks()-times[times.size()-1 ])%1000;
-  //   io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
-  // }
+
+  if (recording) {
+    std::stringstream strm;
+    strm << /*"Recording time: " <<*/ (clock.getTicks() - timesRed[0]) / 1000 << "." << (clock.getTicks()-timesRed[0])%1000;
+    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+  }
+
+  if (playRecording) {
+    std::stringstream strm;
+    strm << /* "Playing time: " */ (clock.getTicks() - timesRed[timesRed.size()-1]) / 60000 << ":" << (clock.getTicks()-timesRed[timesRed.size()-1 ])%60000/1000;
+    io.writeText(strm.str(), {0, 0, 0, 255}, 30, 440);
+  }
 
 
 
