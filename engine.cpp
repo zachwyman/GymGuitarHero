@@ -29,7 +29,9 @@ Engine::Engine() :
   nightsky("blackBackground", Gamedata::getInstance().getXmlInt("blackBackground/factor") ),
   viewport( Viewport::getInstance() ),
   sprites(),
-  times(),
+  timesRed(),
+  timesBlue(),
+  timesGreen(),
   playRecording(false),
   recording(false),
   currentSprite(0),
@@ -81,22 +83,54 @@ void Engine::update(Uint32 ticks) {
     sprites[i]->update(ticks);
   }
   if (playRecording) {
-    int weight = -times[0]+times[times.size()-1]-3500;
+    int weight = -timesRed[0]+timesRed[timesRed.size()-1]-3500;
 
-    for (unsigned int i = 1; i < times.size()-1; i++) {
-      float dist = times[i]-times[0];
+    for (unsigned int i = 1; i < timesRed.size()-1; i++) {
+      float dist = timesRed[i]-timesRed[0];
       float start = dist / 3350 * 854;
       int st = start;
       if (dist < 3350 && dist > 0) {
         std::cout << st << std::endl;
         sprites.push_back(new Sprite("Red", st));
-        times[i] -= 4000;
+        timesRed[i] -= 4000;
       }
-      else if (times[i]+weight > (clock.getTicks()) && (times[i]+weight < (clock.getTicks()+100))) {
+      else if (timesRed[i]+weight > (clock.getTicks()) && (timesRed[i]+weight < (clock.getTicks()+100))) {
         sprites.push_back(new Sprite("Red"));
-        times[i] = 0 - times[i];
+        timesRed[i] = 0 - timesRed[i];
       }
     }
+
+    for (unsigned int i = 0; i < timesGreen.size(); i++) {
+      float dist = timesGreen[i]-timesRed[0];
+      std::cout << dist << std::endl;
+      float start =  (1 - (dist / 3500)) * 854;
+      int st = start;
+      if (dist < 3500 && dist > 0) {
+        std::cout << st << std::endl;
+        sprites.push_back(new Sprite("Green", st));
+        timesGreen[i] -= 4000;
+      }
+      else if (timesGreen[i]+weight > (clock.getTicks()) && (timesGreen[i]+weight < (clock.getTicks()+100))) {
+        sprites.push_back(new Sprite("Green"));
+        timesGreen[i] = 0 - timesGreen[i];
+      }
+    }
+
+    for (unsigned int i = 0; i < timesBlue.size(); i++) {
+      float dist = timesBlue[i]-timesRed[0];
+      float start = dist / 3350 * 750;
+      int st = start;
+      if (dist < 3350 && dist > 0) {
+        std::cout << st << std::endl;
+        sprites.push_back(new Sprite("Blue", st));
+        timesBlue[i] -= 4000;
+      }
+      else if (timesBlue[i]+weight > (clock.getTicks()) && (timesBlue[i]+weight < (clock.getTicks()+100))) {
+        sprites.push_back(new Sprite("Blue"));
+        timesBlue[i] = 0 - timesBlue[i];
+      }
+    }
+
   }
   nightsky.update();
   viewport.update(); // always update viewport last
@@ -137,14 +171,24 @@ void Engine::play() {
         }
         if (keystate[SDL_SCANCODE_R]) {
           sound.startMusic();
-          times.clear();
+          timesRed.clear();
+          timesBlue.clear();
+          timesGreen.clear();
           recording = true;
           playRecording = false;
-          times.push_back(clock.getTicks());
+          timesRed.push_back(clock.getTicks());
         }
-        if (keystate[SDL_SCANCODE_SPACE] && recording) {
-          times.push_back(clock.getTicks());
+        if (keystate[SDL_SCANCODE_J] && recording) {
+          timesRed.push_back(clock.getTicks());
           sprites.push_back(new Sprite("Red"));
+        }
+        if (keystate[SDL_SCANCODE_K] && recording) {
+          timesGreen.push_back(clock.getTicks());
+          sprites.push_back(new Sprite("Green"));
+        }
+        if (keystate[SDL_SCANCODE_L] && recording) {
+          timesBlue.push_back(clock.getTicks());
+          sprites.push_back(new Sprite("Blue"));
         }
         if (keystate[SDL_SCANCODE_G]) {
           sound.stopMusic();
@@ -152,7 +196,7 @@ void Engine::play() {
         //  makeVideo = true;
           recording = false;
           playRecording = true;
-          times.push_back(clock.getTicks());
+          timesRed.push_back(clock.getTicks());
         }
         else if (keystate[SDL_SCANCODE_F4] && makeVideo) {
           std::cout << "Terminating frame capture" << std::endl;

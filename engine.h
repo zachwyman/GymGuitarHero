@@ -25,7 +25,9 @@ private:
   Viewport& viewport;
 
   std::vector<Drawable*> sprites;
-  std::vector<int> times;
+  std::vector<int> timesRed;
+  std::vector<int> timesBlue;
+  std::vector<int> timesGreen;
 
   bool playRecording;
   bool recording;
