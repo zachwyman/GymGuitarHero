@@ -54,8 +54,8 @@ void Engine::draw() const {
 
   if (recording) {
     std::stringstream strm;
-    strm << /*"Recording time: " <<*/ (clock.getTicks() - timesRed[0]) / 1000 << "." << (clock.getTicks()-timesRed[0])%1000;
-    io.writeText(strm.str(), {255, 0, 255, 255}, 30, 440);
+    strm << /*"Recording time: " <<*/ (clock.getTicks() - timesRed[0]) / 60000 << ":" << (clock.getTicks()-timesRed[0])%60000/1000;
+    io.writeText(strm.str(), {0, 0, 0, 255}, 30, 440);
   }
 
   if (playRecording) {
@@ -87,9 +87,9 @@ void Engine::update(Uint32 ticks) {
 
     for (unsigned int i = 1; i < timesRed.size()-1; i++) {
       float dist = timesRed[i]-timesRed[0];
-      float start = dist / 3350 * 854;
+      float start =  (1 - (dist / 3500)) * 854;
       int st = start;
-      if (dist < 3350 && dist > 0) {
+      if (dist < 3500 && dist > 0) {
         std::cout << st << std::endl;
         sprites.push_back(new Sprite("Red", st));
         timesRed[i] -= 4000;
@@ -118,9 +118,9 @@ void Engine::update(Uint32 ticks) {
 
     for (unsigned int i = 0; i < timesBlue.size(); i++) {
       float dist = timesBlue[i]-timesRed[0];
-      float start = dist / 3350 * 750;
+      float start =  (1 - (dist / 3500)) * 854;
       int st = start;
-      if (dist < 3350 && dist > 0) {
+      if (dist < 3500 && dist > 0) {
         std::cout << st << std::endl;
         sprites.push_back(new Sprite("Blue", st));
         timesBlue[i] -= 4000;
